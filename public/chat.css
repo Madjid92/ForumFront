@@ -1,0 +1,16 @@
+header {
+    background-color: aquamarine;
+    text-align: center;
+    
+}
+.chatBox {
+    background-color: beige;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    height: 100px;
+    overflow: scroll;
+}
+
+
