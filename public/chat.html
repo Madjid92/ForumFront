@@ -4,11 +4,14 @@
         <meta charset="utf-8">
         <link href="chat.css" rel="stylesheet">
         <link href="common.css" rel="stylesheet">
+        <script src="https://cdn.socket.io/3.1.3/socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>
+        
         <title>Chat space</title>
     </head>
     <body>
         <header>
            <h1> Messagerie des internautes</h1>
+           
         </header>
         <main>
             <div class="titleChatBox">
@@ -20,7 +23,8 @@
                 <input type="text" id="valueMessage"/>
                 <input id="buttonSubmitMessage" type="button" value="Envoyer"/>
             </div>
-            <script src="chat.js"></script>
+           
+            <script src="chat.js" defer></script>
         </main>
         
     </body>

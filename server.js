@@ -14,5 +14,8 @@ app.get('/login', function(req, res) {
 });
 
 
-app.listen(port);
-console.log('Server started at http://localhost:' + port);
+
+
+app.listen(port, () =>{
+  console.log('Server started at http://localhost:' + port);
+});

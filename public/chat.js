@@ -11,6 +11,18 @@ async function getMessages(token, dateAfterTs) {
 
 };
 
+
+const socket = io("http://localhost:3000");
+socket.on("connect", () => {
+    console.log("connection to socket", socket.id); // x8WIv7-mJelg7on_ALbx
+});
+
+socket.on("message", (msg) =>{
+    const tmsg = transformMsg(msg);
+    document.getElementById("chatBox").appendChild(createSpan(tmsg));
+})
+
+
 const latMessagtTimestamp = () => {
     let ts = 0;
     return {
@@ -36,23 +48,21 @@ async function getMsgsOrRedirect() {
     return await resp.json();
 }
 
-
-const displayMsgs = (messages) => {
-    if (!messages) return;
-    const infoToDisp = messages.map((e, i) => {
-        const { login, content, date: ts } = e;
+const transformMsg = (msg) =>{
+    const { login, content, date: ts } = msg;
         const date = new Date(ts);
-        if (i === messages.length - 1) {
-            tsManager.set(ts);
-        }
         return {
             login,
             content,
             date: `${date.getDate()}/${date.getMonth()}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()} `
         }
-    });
+}
 
-    infoToDisp.forEach((e, i) => {
+const displayMsgs = (messages) => {
+    if (!messages) return;
+    const infoToDisp = messages.map(transformMsg);
+
+    infoToDisp.forEach((e) => {
         document.getElementById("chatBox").appendChild(createSpan(e));
     });
 }
@@ -60,11 +70,11 @@ const displayMsgs = (messages) => {
 
 getMsgsOrRedirect().then((messages) => {
     displayMsgs(messages);
-    setInterval(async () => {
+    /*setInterval(async () => {
         const token = localStorage.getItem("token");
         const messages = await getMessages(token, tsManager.get());
         displayMsgs(await messages.json());
-    }, 1000)
+    }, 1000)*/
 });
 
 function createSpan(elem) {
