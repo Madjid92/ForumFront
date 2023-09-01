@@ -12,7 +12,7 @@ async function checkLogin(evt) {
     });
     console.log(body);
     try {
-        const response = await fetch('http://localhost:3000/login', {
+        const response = await fetch(`http://${ipAddress}/login`, {
             method: "POST",
             //mode: 'same-origin',
             headers :{

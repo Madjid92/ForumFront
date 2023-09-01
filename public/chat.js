@@ -1,7 +1,7 @@
 
 async function getMessages(token, dateAfterTs) {
     const filter = (dateAfterTs) ? "?dateAfterTs=" + dateAfterTs : ""
-    return await fetch(`http://localhost:3000/messages${filter}`, {
+    return await fetch(`http://${ipAddress}/messages${filter}`, {
         method: "GET",
         //mode: 'same-origin',
         headers: {
@@ -12,7 +12,7 @@ async function getMessages(token, dateAfterTs) {
 };
 
 
-const socket = io("http://localhost:3000");
+const socket = io(ipAddress);
 socket.on("connect", () => {
     console.log("connection to socket", socket.id); // x8WIv7-mJelg7on_ALbx
 });
@@ -89,7 +89,7 @@ async function saveMessages() {
     const msg = document.getElementById("valueMessage").value;
     if (!msg) return;
     const token = localStorage.getItem("token");
-    return await fetch('http://localhost:3000/messages/send', {
+    return await fetch(`http://${ipAddress}/messages/send`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
